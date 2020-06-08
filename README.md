@@ -1,6 +1,12 @@
 # Bootstrap Kubernetes cluster with Vagrant
 Sometimes spinning up a Kubernetes cluster using Virtualbox is just enough to get going. This accomplish this using Vagrant and Virtualbox. By default it will spin up a master node and one worker node. You will have to manually join the worker node to the cluster.
 
+Requirements:
+* vagrant
+* virtualbox
+* kubectl
+* plenty of CPU and memory ressources...
+
 ```bash
 # Spin up master and worker node
 vagrant up # this will take 5 min
@@ -13,6 +19,9 @@ vagrant ssh worker1 -- -t 'sudo kubeadm join [your unique string from above comm
 
 # Get kube config
 vagrant ssh master -- -t 'sudo cat /root/.kube/config'
+
+# Verify that worker node joined the cluster (using the above kube config from host machine)
+kubectl get nodes -w
 
 # When enough is enough (take down cluster)
 vagrant destroy
