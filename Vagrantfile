@@ -4,7 +4,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", path: "bootstrap.sh"
 
-  # Master
+  # Master node
   config.vm.define "master" do |master|
     master.vm.box = "ubuntu/bionic64"
     master.vm.hostname = "master"
@@ -12,12 +12,12 @@ Vagrant.configure("2") do |config|
     master.vm.provider "virtualbox" do |vb|
       vb.name = "master"
       vb.memory = "1024"
-      vb.cpus = "2"
+      vb.cpus = "2" # min 2 required
     end
     master.vm.provision "shell", path: "bootstrap_master.sh"
   end
 
-  # Workers
+  # Worker nodes
   WORKERS = 1
 
   (1..WORKERS).each do |i|
