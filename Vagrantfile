@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
 
   # Master node
   config.vm.define "master" do |master|
-    master.vm.box = "ubuntu/bionic64"
+    master.vm.box = "generic/ubuntu1804"
     master.vm.hostname = "master"
     master.vm.network "private_network", ip: "172.42.42.100"
     master.vm.provider "virtualbox" do |vb|
@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
 
   (1..WORKERS).each do |i|
     config.vm.define "worker#{i}" do |worker|
-      worker.vm.box = "ubuntu/bionic64"
+      worker.vm.box = "generic/ubuntu1804"
       worker.vm.hostname = "worker#{i}"
       worker.vm.network "private_network", ip: "172.42.42.10#{i}"
       worker.vm.provider "virtualbox" do |vb|
