@@ -1,4 +1,4 @@
-export KUBE_VERSION=1.18.2-00
+export KUBE_VERSION=1.17.9-00
 
 # Get Docker gpg key
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -20,11 +20,14 @@ EOF
 sudo apt-get update
 
 # Install Docker, kubelet, kubeadm and kubectl
-sudo apt-get install -y docker-ce=18.06.1~ce~3-0~ubuntu \
+sudo apt-get install -y docker-ce \
   kubelet=$KUBE_VERSION \
   kubeadm=$KUBE_VERSION \
   kubectl=$KUBE_VERSION
 
 # Add iptables rule
-echo "net.bridge.bridge-nf-call-iptables=1" | sudo tee -a /etc/sysctl.conf
-sudo sysctl -p
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sudo sysctl --system
