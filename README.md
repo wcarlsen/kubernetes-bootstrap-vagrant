@@ -10,23 +10,17 @@ Requirements:
 * plenty of CPU and memory ressources...
 
 ```bash
-# Spin up master and worker node
-vagrant up # this will take 5 min
-
-# Get join command for worker node
-vagrant ssh master -- -t 'sudo kubeadm token create --ttl 2h --print-join-command'
-
-# Join worker node to cluster
-vagrant ssh worker1 -- -t 'sudo kubeadm join [your unique string from above command]'
+# Spin up master and worker node(s)
+make up # this will take 5 min
 
 # Get kube config
-vagrant ssh master -- -t 'sudo cat /root/.kube/config'
+make kube_config
 
 # Verify that worker node joined the cluster (using the above kube config from host machine)
 kubectl get nodes -w
 
 # When enough is enough (take down cluster)
-vagrant destroy
+make destroy
 ```
 
 Remember that you can increase the node count by changing the `WORKER = 1` parameter in the Vagrantfile.

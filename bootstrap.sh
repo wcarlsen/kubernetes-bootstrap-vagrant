@@ -1,4 +1,7 @@
-export KUBE_VERSION=1.17.9-00
+#!/bin/bash
+
+# Kubernetes version
+export KUBE_VERSION=1.18.8-00
 
 # Get Docker gpg key
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -

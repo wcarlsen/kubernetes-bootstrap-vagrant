@@ -30,6 +30,12 @@ Vagrant.configure("2") do |config|
         vb.memory = "1024"
         vb.cpus = "1"
       end
+      worker.vm.provision "shell", privileged: false, inline: <<-SHELL
+sudo /vagrant/join.sh
+echo 'Environment="KUBELET_EXTRA_ARGS=--node-ip=172.42.42.10#{i}"' | sudo tee -a /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+sudo systemctl daemon-reload
+sudo systemctl restart kubelet
+SHELL
     end
   end
 end
