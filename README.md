@@ -35,4 +35,6 @@ vagrant ssh worker1
 
 # Become root user
 sudo su
+# or
+sudo -i
 ```

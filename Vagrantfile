@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
   end
 
   # Worker nodes
-  WORKERS = 1
+  WORKERS = 2
 
   (1..WORKERS).each do |i|
     config.vm.define "worker#{i}" do |worker|
