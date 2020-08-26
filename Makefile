@@ -4,7 +4,7 @@ up:
 
 kube_config:
 	mkdir -p ~/.kube
-	vagrant ssh master -- -t 'sudo cat /root/.kube/config' > ~/.kube/config
+	vagrant ssh master -- -t 'cat /home/vagrant/.kube/config' > ~/.kube/config
 
 destroy:
 	vagrant destroy -f
