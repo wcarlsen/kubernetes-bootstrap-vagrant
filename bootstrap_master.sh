@@ -18,4 +18,6 @@ sudo systemctl daemon-reload
 sudo systemctl restart kubelet
 
 # Add CNI
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+# kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+# or if network policies are your thing
+kubectl apply -f https://raw.githubusercontent.com/cilium/cilium/v1.8/install/kubernetes/quick-install.yaml
